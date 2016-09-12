@@ -13,7 +13,8 @@ Completed user stories:
 
 **Walkthrough of required user stories:**
 
-![](gif/gif-basic-and-required-01.gif)
+![](./tipCalculator.gif)
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
+

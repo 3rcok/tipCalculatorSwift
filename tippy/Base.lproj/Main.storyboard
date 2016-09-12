@@ -13,15 +13,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ME-SN-Am5">
-                                <rect key="frame" x="109" y="114" width="23" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vVm-4d-fyG">
-                                <rect key="frame" x="228" y="188" width="45" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vVm-4d-fyG" userLabel="TipLabel">
+                                <rect key="frame" x="183" y="188" width="90" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,8 +32,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="utF-G7-vBf">
-                                <rect key="frame" x="228" y="265" width="45" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="utF-G7-vBf" userLabel="TotalLabel">
+                                <rect key="frame" x="183" y="265" width="90" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,6 +67,13 @@
                                     <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="editingChanged" id="8mu-F8-D95"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ME-SN-Am5">
+                                <rect key="frame" x="90" y="114" width="23" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -84,15 +84,15 @@
                     <navigationItem key="navigationItem" title="Tip Calculator" id="El7-sf-s7z">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="VT3-lf-fK9">
                             <connections>
-                                <segue destination="W8V-KH-c28" kind="push" id="8x0-F6-Fjg"/>
+                                <segue destination="W8V-KH-c28" kind="push" id="UeP-Tx-9ry"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="billField" destination="XaG-f8-cMO" id="MdP-pY-V0X"/>
                         <outlet property="tipControl" destination="Tqj-jC-fER" id="sYf-fn-2YK"/>
-                        <outlet property="tipLable" destination="vVm-4d-fyG" id="kUL-lZ-Xdm"/>
-                        <outlet property="totalLable" destination="KeL-WL-nM6" id="Fkk-nK-qLb"/>
+                        <outlet property="tipLabel" destination="vVm-4d-fyG" id="Ysb-Ng-4BV"/>
+                        <outlet property="totalLabel" destination="utF-G7-vBf" id="Z5M-tY-qHg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -128,7 +128,7 @@
                                     <segment title="25%"/>
                                 </segments>
                                 <connections>
-                                    <action selector="changeDefaultPercentage:" destination="W8V-KH-c28" eventType="valueChanged" id="DcK-Vm-Vei"/>
+                                    <action selector="changeDefaultPercentage:" destination="W8V-KH-c28" eventType="valueChanged" id="pS6-DL-1Q1"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
@@ -136,7 +136,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oAj-L3-U1s"/>
                     <connections>
-                        <outlet property="tipController" destination="AEe-yg-c0D" id="2nA-70-8mz"/>
+                        <outlet property="tipControl" destination="AEe-yg-c0D" id="GbC-Pq-SYS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DGD-V0-mqg" userLabel="First Responder" sceneMemberID="firstResponder"/>

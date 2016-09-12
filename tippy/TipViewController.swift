@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TipViewController: UIViewController {
-
+@objc(TipViewController) class TipViewController: UIViewController {
+    
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -19,11 +19,8 @@ class TipViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let intValue = defaults.integerForKey("default_index")
-        tipControl.selectedSegmentIndex = intValue
-        
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,6 +48,13 @@ class TipViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let intValue = defaults.integerForKey("default_index")
+        tipControl.selectedSegmentIndex = intValue
+        
+
+        self.calculateTip(self)
+        
     }
     
     override func viewDidAppear(animated: Bool) {

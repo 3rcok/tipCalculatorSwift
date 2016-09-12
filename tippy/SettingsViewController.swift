@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        print(NSUserDefaults.standardUserDefaults().valueForKey("default_index"))
+
         // Dispose of any resources that can be recreated.
     }
     
@@ -29,9 +31,8 @@ class SettingsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
     @IBAction func changeDefaultPercentage(sender: UISegmentedControl) {
-        
-        
         let defaultIndex = tipControl.selectedSegmentIndex
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(defaultIndex, forKey: "default_index")
@@ -39,6 +40,29 @@ class SettingsViewController: UIViewController {
 
     }
 
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("view will appear")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let intValue = defaults.integerForKey("default_index")
+        tipControl.selectedSegmentIndex = intValue
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("view did appear")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("view will disappear")
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("view did disappear")
+    }
 
 
 
