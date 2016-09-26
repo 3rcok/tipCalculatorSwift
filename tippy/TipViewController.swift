@@ -10,6 +10,14 @@ import UIKit
 
 @objc(TipViewController) class TipViewController: UIViewController {
     
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let PreviousBill = "previous_bill"
+    let PreviousBillDate = "previous_bill_date"
+    let DefaultBill = 0.0
+
+
+    
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -19,8 +27,19 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        billField.becomeFirstResponder()
+        updateToPreviousTotal()
+   
+
+        
     }
-    
+    func updateToPreviousTotal() {
+
+        if previousBill != DefaultBill && billWasEnteredRecently() {
+            billField.text = String(previousBill)
+            calculateTip(self)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,16 +58,42 @@ import UIKit
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
+        
+        
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
+        previousBill = bill;
 
         
+    }
+    var previousBill: Double {
+        get {
+            return defaults.valueForKey(PreviousBill) as? Double ?? DefaultBill
+        }
+        
+        set {
+            previousBillDate = NSDate.timeIntervalSinceReferenceDate()
+            defaults.setDouble(newValue, forKey: PreviousBill)
+        }
+    }
+    
+    func billWasEnteredRecently() -> Bool {
+        let now = NSDate.timeIntervalSinceReferenceDate()
+        return (now - previousBillDate) < (10 * 60) // Ten minutes
+    }
+    var previousBillDate: NSTimeInterval {
+        get {
+            return defaults.valueForKey(PreviousBillDate) as? Double ?? 0.0
+        }
+        
+        set {
+            defaults.setDouble(newValue, forKey: PreviousBillDate)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
-        let defaults = NSUserDefaults.standardUserDefaults()
         let intValue = defaults.integerForKey("default_index")
         tipControl.selectedSegmentIndex = intValue
         
@@ -60,6 +105,7 @@ import UIKit
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         print("view did appear")
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
