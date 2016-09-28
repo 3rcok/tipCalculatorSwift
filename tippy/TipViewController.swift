@@ -29,10 +29,20 @@ import UIKit
         // Do any additional setup after loading the view, typically from a nib.
         billField.becomeFirstResponder()
         updateToPreviousTotal()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(TipViewController.saveCurrentState), name: UIApplicationDidEnterBackgroundNotification, object: nil)
    
 
         
     }
+    
+    func saveCurrentState() {
+        // When the user leaves the app and then comes back again, he wants it to be in the exact same state
+        // he left it. In order to do this we need to save the currently displayed album.
+        // Since it's only one piece of information we can use NSUserDefaults.
+        NSUserDefaults.standardUserDefaults().setDouble(Double(billField.text!)!, forKey: PreviousBill)
+    }
+    
     func updateToPreviousTotal() {
 
         if previousBill != DefaultBill && billWasEnteredRecently() {
@@ -116,6 +126,10 @@ import UIKit
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         print("view did disappear")
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 }
