@@ -24,7 +24,6 @@ import UIKit
     @IBOutlet weak var totalTextLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
-    @IBOutlet weak var billTextLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
     @IBOutlet weak var tipValueLabel: UILabel!
@@ -187,16 +186,17 @@ import UIKit
                     self.totalTextLabel.center.y -= 10
                     
                     self.billField.center.y -= 10
-                    self.billTextLabel.center.y -= 10
                     self.doonce = 1
                 });
             }
         } else {
                         print("doonce != 0")
 
-            billTotal = 0;
-            self.totalLabel.alpha = 0;
-            self.totalTextLabel.alpha = 0;
+            billTotal = 0
+
+            self.billField.alpha = 1
+            self.totalLabel.alpha = 0
+            self.totalTextLabel.alpha = 0
             self.tipTextLabel.alpha = 0
             self.tipValueLabel.alpha = 0
             self.tipControl.alpha = 0
@@ -210,7 +210,6 @@ import UIKit
                     self.tipControl.center.y += 10
                     
                     self.billField.center.y += 10
-                    self.billTextLabel.center.y += 10
                     
                     self.totalLabel.center.y += 10
                     self.totalTextLabel.center.y += 10
