@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		840BE5D61D80590A00121DC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BE5D51D80590A00121DC0 /* AppDelegate.swift */; };
-		840BE5D81D80590A00121DC0 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BE5D71D80590A00121DC0 /* TipViewController.swift */; };
 		840BE5DB1D80590A00121DC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840BE5D91D80590A00121DC0 /* Main.storyboard */; };
 		840BE5DD1D80590A00121DC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840BE5DC1D80590A00121DC0 /* Assets.xcassets */; };
 		840BE5E01D80590A00121DC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840BE5DE1D80590A00121DC0 /* LaunchScreen.storyboard */; };
 		840BE5EB1D80590A00121DC0 /* tippyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BE5EA1D80590A00121DC0 /* tippyTests.swift */; };
 		840BE5F61D80590A00121DC0 /* tippyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BE5F51D80590A00121DC0 /* tippyUITests.swift */; };
+		8433D7041E73203200680169 /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433D7031E73203200680169 /* TipViewController.swift */; };
 		8462C0301D8310280090E096 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462C02F1D8310280090E096 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		840BE5D21D80590A00121DC0 /* tippy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tippy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		840BE5D51D80590A00121DC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		840BE5D71D80590A00121DC0 /* TipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		840BE5DA1D80590A00121DC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		840BE5DC1D80590A00121DC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		840BE5DF1D80590A00121DC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,6 +47,7 @@
 		840BE5F11D80590A00121DC0 /* tippyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tippyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		840BE5F51D80590A00121DC0 /* tippyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tippyUITests.swift; sourceTree = "<group>"; };
 		840BE5F71D80590A00121DC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8433D7031E73203200680169 /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		8462C02F1D8310280090E096 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,8 +99,8 @@
 		840BE5D41D80590A00121DC0 /* tippy */ = {
 			isa = PBXGroup;
 			children = (
+				8433D7031E73203200680169 /* TipViewController.swift */,
 				840BE5D51D80590A00121DC0 /* AppDelegate.swift */,
-				840BE5D71D80590A00121DC0 /* TipViewController.swift */,
 				840BE5D91D80590A00121DC0 /* Main.storyboard */,
 				8462C02F1D8310280090E096 /* SettingsViewController.swift */,
 				840BE5DC1D80590A00121DC0 /* Assets.xcassets */,
@@ -196,13 +196,16 @@
 				TargetAttributes = {
 					840BE5D11D80590A00121DC0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					840BE5E51D80590A00121DC0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 840BE5D11D80590A00121DC0;
 					};
 					840BE5F01D80590A00121DC0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 840BE5D11D80590A00121DC0;
 					};
 				};
@@ -259,8 +262,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				840BE5D81D80590A00121DC0 /* TipViewController.swift in Sources */,
 				840BE5D61D80590A00121DC0 /* AppDelegate.swift in Sources */,
+				8433D7041E73203200680169 /* TipViewController.swift in Sources */,
 				8462C0301D8310280090E096 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +410,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -418,6 +422,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -429,6 +434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tippy.app/tippy";
 			};
 			name = Debug;
@@ -441,6 +447,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tippy.app/tippy";
 			};
 			name = Release;
@@ -452,6 +459,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = tippy;
 			};
 			name = Debug;
@@ -463,6 +471,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.tippyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = tippy;
 			};
 			name = Release;
