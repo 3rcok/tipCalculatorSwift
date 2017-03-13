@@ -43,10 +43,11 @@ import UIKit
     }
     
     func saveCurrentState() {
+        print("***************saveCurrent")
         // When the user leaves the app and then comes back again, he wants it to be in the exact same state
         // he left it. In order to do this we need to save the currently displayed album.
         // Since it's only one piece of information we can use NSUserDefaults.
-        UserDefaults.standard.set(Double(billField.text!) ?? Double(0) , forKey: PreviousBill)
+        UserDefaults.standard.set(Double(billField.text!) ?? 0 , forKey: PreviousBill)
     }
     
     func updateToPreviousTotal() {
@@ -68,14 +69,18 @@ import UIKit
     
     @IBAction func calculateTip(_ sender: AnyObject) {
         /*
-        let bill = Double(billField.text!) ?? 0
+       let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
 
         tipValueLabel.text = String(format: "%.2f", tip)
-        totalLabel.text = String(format: "%.2f", total)
+        totalLabel.text = String(format: "$%.2f", total)
+        previousBill = bill
         
         */
+        let bill = Double(billField.text!) ?? 0
+        previousBill = bill
+
         updateView()
     }
 
@@ -128,7 +133,7 @@ import UIKit
         
         //save input
         let defaults = UserDefaults.standard
-        defaults.set(Double(billField.text!) ?? 0, forKey: "billTotal")
+        defaults.set(Double(billField.text!) ?? 0, forKey: PreviousBill)
         defaults.synchronize()
 
         print("view will disappear")
@@ -140,7 +145,6 @@ import UIKit
 //                let bill = Double(billField.text!) ?? 0
 
             billTotal = NSString(string: billField.text!).doubleValue
-            previousBill = billTotal
 
             if (tipControl.selectedSegmentIndex == -1) {
                 //no tip % selected on main screen. adopt default tip %
@@ -255,9 +259,11 @@ import UIKit
             newString = stringArray.joined(separator: "")
             newString.insert(contentsOf: decimalSeparator.characters, at: newString.index(newString.endIndex, offsetBy: -2))
             self.billTotal = Double(newString)!
+            self.previousBill = billTotal
         } else {
             if let billAmount = formatter.number(from: newString) as? Double {
                 self.billTotal = billAmount
+                self.previousBill = billTotal
             }
 
 
