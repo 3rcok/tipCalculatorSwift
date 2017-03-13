@@ -177,15 +177,15 @@ import UIKit
                     self.tipControl.alpha = 1
 
                     //move all fields up 100
-                    self.tipControl.center.y -= 10
+                    self.tipControl.center.y -= 100
                     
-                    self.tipTextLabel.center.y -= 10
-                    self.tipValueLabel.center.y -= 10
+                    self.tipTextLabel.center.y -= 100
+                    self.tipValueLabel.center.y -= 100
 
-                    self.totalLabel.center.y -= 10
-                    self.totalTextLabel.center.y -= 10
+                    self.totalLabel.center.y -= 100
+                    self.totalTextLabel.center.y -= 100
                     
-                    self.billField.center.y -= 10
+                    self.billField.center.y -= 100
                     self.doonce = 1
                 });
             }
@@ -207,12 +207,15 @@ import UIKit
 
                 //move all fields down 100
                 UIView.animate(withDuration: 0.5, animations: {
-                    self.tipControl.center.y += 10
+                    self.tipControl.center.y += 100
                     
-                    self.billField.center.y += 10
+                    self.billField.center.y += 100
                     
-                    self.totalLabel.center.y += 10
-                    self.totalTextLabel.center.y += 10
+                    self.totalLabel.center.y += 100
+                    self.totalTextLabel.center.y += 100
+                    
+                    self.tipTextLabel.center.y += 100
+                    self.tipValueLabel.center.y += 100
                     
                     self.doonce = 0
                     
