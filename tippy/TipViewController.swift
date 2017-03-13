@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(TipViewController) class TipViewController: UIViewController {
+@objc(TipViewController) class TipViewController: UIViewController, UITextFieldDelegate {
     
     
     let defaults = UserDefaults.standard
@@ -29,9 +29,9 @@ import UIKit
     @IBOutlet weak var tipValueLabel: UILabel!
     @IBOutlet weak var tipTextLabel: UILabel!
     
-    var currencyFormatter: NumberFormatter = NumberFormatter()
+    var formatter: NumberFormatter = NumberFormatter()
     let tipPercentages = [0.18, 0.2, 0.25]
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,14 +67,15 @@ import UIKit
     }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
-        
+        /*
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
 
         tipValueLabel.text = String(format: "%.2f", tip)
-        totalLabel.text = String(format: "$%.2f", total)
-        previousBill = bill
+        totalLabel.text = String(format: "%.2f", total)
+        
+        */
         updateView()
     }
 
@@ -105,7 +106,9 @@ import UIKit
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
-        billField.placeholder = currencyFormatter.currencySymbol
+        billField.placeholder = formatter.currencySymbol
+        formatter.numberStyle = .currency
+
         let intValue = defaults.integer(forKey: "defaultTipIndex")
         tipControl.selectedSegmentIndex = intValue
 
@@ -134,7 +137,11 @@ import UIKit
     func updateView() {
         let defaults = UserDefaults.standard
         if (!billField.text!.isEmpty) {
+//                let bill = Double(billField.text!) ?? 0
+
             billTotal = NSString(string: billField.text!).doubleValue
+            previousBill = billTotal
+
             if (tipControl.selectedSegmentIndex == -1) {
                 //no tip % selected on main screen. adopt default tip %
                 if let tipPercentIdx = defaults.object(forKey: "defaultTipIndex") as? Int {
@@ -150,14 +157,12 @@ import UIKit
                 tippercent = tipPercentages[tipControl.selectedSegmentIndex]
             }
 
-            let tip = billTotal * tippercent
+            let tip: Double = billTotal * tippercent
             let val: Double = billTotal + tip
 
-            //self.totalLabel.text=String(format:"$%.2f",billTotal+tip)
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            let nsVal = val as NSNumber
-            totalLabel.text = formatter.string(from: nsVal)!
+
+            totalLabel.text = formatter.string(from: val as NSNumber)!
+            tipValueLabel.text = formatter.string(from: tip as NSNumber)!
 
             if (self.doonce == 0) {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -235,7 +240,35 @@ import UIKit
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    // MARK: - Delegate Methods
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+//        if newString.characters.count >= C.maxDisplayDigits {
+//            return false
+//        }
+        
+        if let decimalSeparator = Locale.current.decimalSeparator {
+            let stringArray = newString.components(separatedBy: CharacterSet.decimalDigits.inverted)
+            newString = stringArray.joined(separator: "")
+            newString.insert(contentsOf: decimalSeparator.characters, at: newString.index(newString.endIndex, offsetBy: -2))
+            self.billTotal = Double(newString)!
+        } else {
+            if let billAmount = formatter.number(from: newString) as? Double {
+                self.billTotal = billAmount
+            }
+
+
+        }
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        billField.resignFirstResponder()
+        return true
+    }
 
 }
 
