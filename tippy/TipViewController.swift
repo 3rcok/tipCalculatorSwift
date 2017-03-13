@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  tippy
 //
-//  Created by Lei2X Wang on 9/7/16.
-//  Copyright © 2016 Lei Wang. All rights reserved.
+//  Created by Lei2X Wang.
+//  Copyright © 2017 Lei Wang. All rights reserved.
 //
 
 import UIKit
@@ -16,10 +16,10 @@ import UIKit
     let PreviousBillDate = "previous_bill_date"
     let DefaultBill = 0.0
 
-    var billTotal:Double = 0.0;
-    var tippercent:Double=18;
-    var doonce=0;
-    var defaultTipIndex:Int=1;
+    var billTotal: Double = 0.0
+    var tippercent: Double = 18
+    var doonce = 0
+    var defaultTipIndex: Int = 1
     
     @IBOutlet weak var totalTextLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
@@ -28,7 +28,8 @@ import UIKit
     
     @IBOutlet weak var tipValueLabel: UILabel!
     @IBOutlet weak var tipTextLabel: UILabel!
-    var currencyFormatter:NumberFormatter=NumberFormatter();
+    
+    var currencyFormatter: NumberFormatter = NumberFormatter()
     let tipPercentages = [0.18, 0.2, 0.25]
     
 
@@ -39,9 +40,6 @@ import UIKit
         updateToPreviousTotal()
         
         NotificationCenter.default.addObserver(self, selector:#selector(TipViewController.saveCurrentState), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
-   
-
-        
     }
     
     func saveCurrentState() {
@@ -65,31 +63,25 @@ import UIKit
     }
 
     @IBAction func onTap(_ sender: AnyObject) {
-        print("Hello")
         view.endEditing(true)
     }
+    
     @IBAction func calculateTip(_ sender: AnyObject) {
-        
-        
         
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
-        
-        
-        
+
         tipValueLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
-        previousBill = bill;
+        previousBill = bill
         updateView()
-
-        
     }
+
     var previousBill: Double {
         get {
             return defaults.value(forKey: PreviousBill) as? Double ?? DefaultBill
         }
-        
         set {
             previousBillDate = Date.timeIntervalSinceReferenceDate
             defaults.set(newValue, forKey: PreviousBill)
@@ -100,11 +92,11 @@ import UIKit
         let now = Date.timeIntervalSinceReferenceDate
         return (now - previousBillDate) < (10 * 60) // Ten minutes
     }
+
     var previousBillDate: TimeInterval {
         get {
             return defaults.value(forKey: PreviousBillDate) as? Double ?? 0.0
         }
-        
         set {
             defaults.set(newValue, forKey: PreviousBillDate)
         }
@@ -126,8 +118,6 @@ import UIKit
             }
         }
         updateView()
-//        self.calculateTip(self)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -137,40 +127,39 @@ import UIKit
         let defaults = UserDefaults.standard
         defaults.set(Double(billField.text!) ?? 0, forKey: "billTotal");
         defaults.synchronize()
-        
+
         print("view will disappear")
     }
     
     func updateView() {
-        var defaults = UserDefaults.standard
+        let defaults = UserDefaults.standard
         if (!billField.text!.isEmpty) {
             billTotal = NSString(string: billField.text!).doubleValue;
             if (tipControl.selectedSegmentIndex == -1) {
                 //no tip % selected on main screen. adopt default tip %
                 if let tipPercentIdx = defaults.object(forKey: "defaultTipIndex") as? Int {
                     //Pull from Settings configuration
-                    tippercent = self.tipPercentages[tipPercentIdx];
-                    tipControl.selectedSegmentIndex = tipPercentIdx;
+                    tippercent = self.tipPercentages[tipPercentIdx]
+                    tipControl.selectedSegmentIndex = tipPercentIdx
                 } else {
                     //Adopt application default
-                    tippercent = self.tipPercentages[defaultTipIndex];
-                    tipControl.selectedSegmentIndex = defaultTipIndex;
+                    tippercent = self.tipPercentages[defaultTipIndex]
+                    tipControl.selectedSegmentIndex = defaultTipIndex
                 }
             } else {
-                tippercent = tipPercentages[tipControl.selectedSegmentIndex];
+                tippercent = tipPercentages[tipControl.selectedSegmentIndex]
             }
 
-            var tip = billTotal * tippercent;
-            var val: Double = billTotal + tip;
+            let tip = billTotal * tippercent
+            let val: Double = billTotal + tip
 
             //self.totalLabel.text=String(format:"$%.2f",billTotal+tip);
-            var formatter = NumberFormatter()
+            let formatter = NumberFormatter()
             formatter.numberStyle = .currency
             let nsVal = val as NSNumber
             totalLabel.text = formatter.string(from: nsVal)!
 
             if (self.doonce == 0) {
-                print("doonce == 0")
                 UIView.animate(withDuration: 0.5, animations: {
                     self.totalLabel.alpha = 1
                     self.totalTextLabel.alpha = 1
@@ -191,8 +180,8 @@ import UIKit
                     self.doonce = 1
                 });
             }
-        } else {
-                        print("doonce != 0")
+        }
+        else {
 
             billTotal = 0
 
@@ -205,8 +194,6 @@ import UIKit
             
             //Empty text so hide view
             if (self.doonce == 1) {
-                                    print("doonce == 1")
-
                 //move all fields down 100
                 UIView.animate(withDuration: 0.5, animations: {
                     self.tipControl.center.y += 100
