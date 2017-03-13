@@ -105,16 +105,16 @@ import UIKit
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
-        billField.placeholder = currencyFormatter.currencySymbol;
+        billField.placeholder = currencyFormatter.currencySymbol
         let intValue = defaults.integer(forKey: "defaultTipIndex")
         tipControl.selectedSegmentIndex = intValue
 
-        self.view.backgroundColor=UIColor.gray;
+        self.view.backgroundColor=UIColor.yellow
         if let theme = defaults.object(forKey: "themeIndex") as? Bool{
             if(theme){
-                self.view.backgroundColor=UIColor.green;
+                self.view.backgroundColor=UIColor.green
             } else {
-                self.view.backgroundColor=UIColor.yellow;
+                self.view.backgroundColor=UIColor.yellow
             }
         }
         updateView()
@@ -125,7 +125,7 @@ import UIKit
         
         //save input
         let defaults = UserDefaults.standard
-        defaults.set(Double(billField.text!) ?? 0, forKey: "billTotal");
+        defaults.set(Double(billField.text!) ?? 0, forKey: "billTotal")
         defaults.synchronize()
 
         print("view will disappear")
@@ -134,7 +134,7 @@ import UIKit
     func updateView() {
         let defaults = UserDefaults.standard
         if (!billField.text!.isEmpty) {
-            billTotal = NSString(string: billField.text!).doubleValue;
+            billTotal = NSString(string: billField.text!).doubleValue
             if (tipControl.selectedSegmentIndex == -1) {
                 //no tip % selected on main screen. adopt default tip %
                 if let tipPercentIdx = defaults.object(forKey: "defaultTipIndex") as? Int {
@@ -153,7 +153,7 @@ import UIKit
             let tip = billTotal * tippercent
             let val: Double = billTotal + tip
 
-            //self.totalLabel.text=String(format:"$%.2f",billTotal+tip);
+            //self.totalLabel.text=String(format:"$%.2f",billTotal+tip)
             let formatter = NumberFormatter()
             formatter.numberStyle = .currency
             let nsVal = val as NSNumber
@@ -178,7 +178,7 @@ import UIKit
                     
                     self.billField.center.y -= 100
                     self.doonce = 1
-                });
+                })
             }
         }
         else {
@@ -214,7 +214,7 @@ import UIKit
                     self.tipValueLabel.alpha = 0
                     self.tipControl.alpha = 0
                     
-                });
+                })
             }
         }
     }
