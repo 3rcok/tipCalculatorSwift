@@ -21,9 +21,6 @@ Completed user stories:
 * [X] Optional: Making sure the keyboard is always visible and the bill amount is always the first responder.
 * [X] Optional: Using locale-specific currency and currency thousands separators.
 
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
 

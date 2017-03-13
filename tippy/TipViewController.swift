@@ -12,9 +12,9 @@ import UIKit
     
     
     let defaults = UserDefaults.standard
-    let PreviousBill = "previous_bill"
-    let PreviousBillDate = "previous_bill_date"
-    let DefaultBill = 0.0
+    let previousBillKey = "previous_bill"
+    let previousBillDateKey = "previous_bill_date"
+    let defaultBill = 0.0
 
     var billTotal: Double = 0.0
     var tippercent: Double = 18
@@ -47,12 +47,12 @@ import UIKit
         // When the user leaves the app and then comes back again, he wants it to be in the exact same state
         // he left it. In order to do this we need to save the currently displayed album.
         // Since it's only one piece of information we can use NSUserDefaults.
-        UserDefaults.standard.set(Double(billField.text!) ?? 0 , forKey: PreviousBill)
+        UserDefaults.standard.set(Double(billField.text!) ?? 0 , forKey: previousBillKey)
     }
     
     func updateToPreviousTotal() {
 
-        if previousBill != DefaultBill && billWasEnteredRecently() {
+        if previousBill != defaultBill && billWasEnteredRecently() {
             billField.text = String(previousBill)
             calculateTip(self)
         }
@@ -68,16 +68,7 @@ import UIKit
     }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
-        /*
-       let bill = Double(billField.text!) ?? 0
-        let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
-        let total = bill + tip
 
-        tipValueLabel.text = String(format: "%.2f", tip)
-        totalLabel.text = String(format: "$%.2f", total)
-        previousBill = bill
-        
-        */
         let bill = Double(billField.text!) ?? 0
         previousBill = bill
 
@@ -86,11 +77,11 @@ import UIKit
 
     var previousBill: Double {
         get {
-            return defaults.value(forKey: PreviousBill) as? Double ?? DefaultBill
+            return defaults.value(forKey: previousBillKey) as? Double ?? defaultBill
         }
         set {
             previousBillDate = Date.timeIntervalSinceReferenceDate
-            defaults.set(newValue, forKey: PreviousBill)
+            defaults.set(newValue, forKey: previousBillKey)
         }
     }
     
@@ -101,10 +92,10 @@ import UIKit
 
     var previousBillDate: TimeInterval {
         get {
-            return defaults.value(forKey: PreviousBillDate) as? Double ?? 0.0
+            return defaults.value(forKey: previousBillDateKey) as? Double ?? 0.0
         }
         set {
-            defaults.set(newValue, forKey: PreviousBillDate)
+            defaults.set(newValue, forKey: previousBillDateKey)
         }
     }
     
@@ -133,7 +124,7 @@ import UIKit
         
         //save input
         let defaults = UserDefaults.standard
-        defaults.set(Double(billField.text!) ?? 0, forKey: PreviousBill)
+        defaults.set(Double(billField.text!) ?? 0, forKey: previousBillKey)
         defaults.synchronize()
 
         print("view will disappear")
@@ -249,11 +240,7 @@ import UIKit
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         var newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        
-//        if newString.characters.count >= C.maxDisplayDigits {
-//            return false
-//        }
-        
+
         if let decimalSeparator = Locale.current.decimalSeparator {
             let stringArray = newString.components(separatedBy: CharacterSet.decimalDigits.inverted)
             newString = stringArray.joined(separator: "")
