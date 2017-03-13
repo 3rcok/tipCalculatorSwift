@@ -8,7 +8,7 @@ Time spent: 10 hours total
 Completed user stories:
 
 * [x] Required: Basic tip calculator functionality
-* [x] Required: Settings page
+* [x] Required: Settings page for default tip percentage and theme background color
 * [x] Optional: Remember bill amount if entered in last 10 minutes
 * [x] Optional: UI Animation
 * [X] Optional: Making sure the keyboard is always visible and the bill amount is always the first responder.
