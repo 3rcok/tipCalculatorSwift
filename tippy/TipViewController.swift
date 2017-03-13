@@ -46,7 +46,7 @@ import UIKit
         // When the user leaves the app and then comes back again, he wants it to be in the exact same state
         // he left it. In order to do this we need to save the currently displayed album.
         // Since it's only one piece of information we can use NSUserDefaults.
-        UserDefaults.standard.set(Double(billField.text!)!, forKey: PreviousBill)
+        UserDefaults.standard.set(Double(billField.text!) ?? Double(0) , forKey: PreviousBill)
     }
     
     func updateToPreviousTotal() {
@@ -72,7 +72,7 @@ import UIKit
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
 
-        tipValueLabel.text = String(format: "$%.2f", tip)
+        tipValueLabel.text = String(format: "%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
         previousBill = bill
         updateView()
