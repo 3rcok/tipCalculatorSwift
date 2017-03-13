@@ -114,15 +114,17 @@ import UIKit
         super.viewWillAppear(animated)
         print("view will appear")
         billField.placeholder = currencyFormatter.currencySymbol;
-        let intValue = defaults.integer(forKey: "default_index")
+        let intValue = defaults.integer(forKey: "defaultTipIndex")
         tipControl.selectedSegmentIndex = intValue
 
-//        self.view.backgroundColor=UIColor.gray;
-//        if let theme = defaults.object(forKey: "themeIndex") as? Bool{
-//            if(theme){
-//                self.view.backgroundColor=UIColor.green;
-//            }
-//        }
+        self.view.backgroundColor=UIColor.gray;
+        if let theme = defaults.object(forKey: "themeIndex") as? Bool{
+            if(theme){
+                self.view.backgroundColor=UIColor.green;
+            } else {
+                self.view.backgroundColor=UIColor.yellow;
+            }
+        }
         updateView()
 //        self.calculateTip(self)
         
